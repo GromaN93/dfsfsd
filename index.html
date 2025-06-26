@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salon Blueberry</title>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+  header {
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1 {
+    color: #7f4da0;
+  }
+  nav a {
+    margin-left: 1rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  section {
+    padding: 3rem 2rem;
+  }
+  .hero {
+    background: url('https://zapodaj.net/images/560b833489149.png') center/cover no-repeat;
+    height: 400px;
+    position: relative;
+  }
+  .hero .cta {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+  }
+  .cta a {
+    background: linear-gradient(135deg, #7f4da0, #9d6bbe);
+    padding: 12px 24px;
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: inline-block;
+    border: none;
+    transition: background 0.3s ease;
+  }
+  .cta a:hover {
+    background: linear-gradient(135deg, #9262ba, #b987db);
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  .gallery {
+    overflow: hidden;
+    position: relative;
+  }
+  .gallery-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .gallery img {
+    min-width: 300px;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-right: 10px;
+    transition: transform 0.2s ease;
+  }
+  .gallery img:hover {
+    transform: scale(1.03);
+  }
+  .lightbox {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  .lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+  }
+  .lightbox.active {
+    display: flex;
+  }
+  .two-columns {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  iframe {
+    width: 100%;
+    height: 300px;
+    border: 0;
+    border-radius: 10px;
+  }
+  footer {
+    background: #f4f4f4;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+  .gallery-controls {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .gallery-controls button {
+    background: #7f4da0;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  #scrollTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #7f4da0;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  }
+  #scrollTopBtn.show {
+    display: flex;
+  }
+  form button {
+    background: #7f4da0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+  }
+</style>
+
+</head>
+<body>
+  <header>
+    <h1>Blueberry</h1>
+    <nav>
+      <a href="#o-nas">O nas</a>
+      <a href="#oferta">Oferta</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#abonament">Abonament</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="cta">
+      <a href="#kontakt">Skontaktuj się</a>
+    </div>
+  </section>
+
+  <section id="o-nas">
+    <h2>O nas</h2>
+    <p>Salon kosmetyczny Blueberry działa na rynku od ponad 10 lat. Specjalizujemy się w profesjonalnej stylizacji paznokci, rzęs i brwi. Dbamy o najwyższy standard usług, atmosferę relaksu i komfort naszych klientek.</p>
+  </section>
+
+  <section id="oferta">
+    <h2>Oferta</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Manicure hybrydowy</h3>
+        <p>80 zł</p>
+      </div>
+      <div class="card">
+        <h3>Pedicure SPA</h3>
+        <p>110 zł</p>
+      </div>
+      <div class="card">
+        <h3>Stylizacja rzęs 1:1</h3>
+        <p>120 zł</p>
+      </div>
+      <div class="card">
+        <h3>Henna + regulacja brwi</h3>
+        <p>50 zł</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <h2>Galeria</h2>
+    <div class="gallery">
+      <div class="gallery-track" id="gallery-track">
+        <img src="https://cdn.pixabay.com/photo/2021/12/27/16/44/nails-6897669_1280.jpg" alt="paznokcie">
+        <img src="https://cdn.pixabay.com/photo/2016/09/21/15/26/eye-1684961_1280.jpg" alt="rzęsy">
+        <img src="https://cdn.pixabay.com/photo/2017/08/07/16/39/girl-2605526_1280.jpg" alt="brwi">
+        <img src="https://cdn.pixabay.com/photo/2019/11/22/18/21/cosmetics-4645407_1280.jpg" alt="makijaż">
+        <img src="https://cdn.pixabay.com/photo/2017/03/31/08/32/beauty-2190682_1280.jpg" alt="paznokcie">
+        <img src="https://cdn.pixabay.com/photo/2017/12/22/14/42/girl-3033718_1280.jpg" alt="rzęsy">
+      </div>
+      <div class="gallery-controls">
+        <button onclick="scrollGallery(-1)">&lt;</button>
+        <button onclick="scrollGallery(1)">&gt;</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="abonament">
+    <h2>Dlaczego my?</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Stały abonament</h3>
+        <p>Zyskaj zniżki i darmowe zabiegi w ramach miesięcznego pakietu.</p>
+      </div>
+      <div class="card">
+        <h3>Gwarancja zadowolenia</h3>
+        <p>Jeśli nie będziesz zadowolona, poprawimy usługę za darmo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mapa dojazdu</h2>
+    <iframe src="https://maps.google.com/maps?q=centrum%20warszawa&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+  </section>
+
+  <section>
+    <h2>Umów wizytę</h2>
+    <input type="date" />
+    <input type="time" />
+  </section>
+
+  <section id="kontakt">
+    <h2>Formularz kontaktowy</h2>
+    <form>
+      <div class="form-group">
+        <input type="text" placeholder="Twoje imię" required>
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Twój email" required>
+      </div>
+      <div class="form-group">
+        <textarea rows="5" placeholder="Wiadomość" required></textarea>
+      </div>
+      <button type="submit" style="background: #7f4da0; color: white; padding: 10px 20px; border: none; border-radius: 30px; font-weight: bold;">Wyślij</button>
+    </form>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="powiększone zdjęcie" />
+  </div>
+
+  <button id="scrollTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">↑</button>
+
+  <footer>
+    <p>&copy; 2025 Salon Blueberry. Wszelkie prawa zastrzeżone.</p>
+  </footer>
+
+  <script>
+    const images = document.querySelectorAll('.gallery img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    });
+
+    function scrollGallery(direction) {
+      const track = document.getElementById('gallery-track');
+      const scrollAmount = 320;
+      track.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollTopBtn = document.getElementById('scrollTopBtn');
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('show');
+      } else {
+        scrollTopBtn.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
